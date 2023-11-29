@@ -1,32 +1,30 @@
-import { useEffect, useRef } from "react"
-import { createPortal } from "react-dom"
+import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 
 export function DialogModal({ isOpen, onClose, children }) {
-  const dialogRef = useRef(null)
+  const dialogRef = useRef(null);
   useEffect(() => {
-    const dialog = dialogRef.current
-    if (dialog == null) return
+    const dialog = dialogRef.current;
+    if (dialog == null) return;
 
     if (isOpen) {
-      dialog.showModal()
+      dialog.showModal();
     } else {
-      dialog.close()
+      dialog.close();
     }
-  }, [isOpen])
+  }, [isOpen]);
 
   useEffect(() => {
-    const dialog = dialogRef.current
-    if (dialog == null) return
-
-    dialog.addEventListener("close", onClose)
-
+    const dialog = dialogRef.current;
+    if (dialog == null) return;
+    dialog.addEventListener("close", onClose);
     return () => {
-      dialog.removeEventListener("close", onClose)
-    }
-  }, [onClose])
+      dialog.removeEventListener("close", onClose);
+    };
+  }, [onClose]);
 
   return createPortal(
     <dialog ref={dialogRef}>{children}</dialog>,
     document.querySelector("#modal-container")
-  )
+  );
 }
