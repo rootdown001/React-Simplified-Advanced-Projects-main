@@ -1,11 +1,12 @@
+import { useState } from "react";
 import DatePicker from "./DatePicker";
 
-function App() {
+export default function App() {
+  const [value, setValue] = useState();
+
   return (
     <>
-      <DatePicker />
+      <DatePicker value={value} onChange={setValue} />
     </>
   );
 }
-
-export default App;
